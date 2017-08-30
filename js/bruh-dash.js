@@ -10,48 +10,91 @@ var global = window || GLOBAL;
 global.bruhdash = {
 
   // returns the first element of an array
-  first: function () {
-      
+  first: function (arr) {
+    return arr[0];
   },
 
   // returns the last element of an array
-  last: function () {
-
+  last: function (arr) {
+    return arr[arr.length - 1];
   },
 
   // returns the index of the first matching element from left to right
-  indexOf: function () {
-
+  indexOf: function (arr,match) {
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i] === match){
+        return i;
+      }else if(i === arr.length - 1){
+        return -1;
+      }
+    }
   },
 
   // returns the index of the first matching element from right to left
-  lastIndexOf: function () {
-
+  lastIndexOf: function (arr,match) {
+    for(var i = arr.length -1; i >= 0; i--){
+      if(arr[i] === match){
+        return i;
+      }else if(i === 0){
+        return -1;
+      }
+    }
   },
 
   // returns an array with all elements except for the last element
-  initial: function () {
-
+  initial: function (arr) {
+    arr.pop();
+    return arr;
   },
   
   // returns an array with all falsey values removed
-  compact: function() {
-
+  compact: function(arr) {
+    var newArr = [];
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i]){
+        newArr.push(arr[i]);
+      }
+    }
+    return newArr;
   },
 
   // creates a slice of an array from the start index up to but not including the end index
-  slice: function () {
-
+  slice: function (arr,start,end) {
+    var newArr = [];
+    for(var i = 0; i < arr.length; i++){
+      if(i >= start && i < end){
+        newArr.push(arr[i]);
+      }
+    }
+    return newArr;
   },
 
   // returns a slice of array with n elements dropped from the beignning
-  drop: function(){
-
+  drop: function(arr,num){
+    var newArr = [];
+    for(var i = 0; i < arr.length; i++){
+      if(i >= num){
+        newArr.push(arr[i]);
+      }else if(num === undefined){
+        arr.shift();
+        return arr;
+      }
+    }
+    return newArr;
   },
 
   // returns a slice of array with n elements dropped from the end
-  dropRight: function() {
-
+  dropRight: function(arr,num) {
+    var newArr = [];
+    for(var i = arr.length - 1; i >= 0; i--){
+      if(i < arr.length - num){
+        newArr.unshift(arr[i]);
+      }else if(num === undefined){
+        arr.pop();
+        return arr;
+      }
+    }
+    return newArr;
   },
 
   // creates a slice of an array with n elements taken from the beginning
