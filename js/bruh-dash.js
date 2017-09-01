@@ -98,29 +98,67 @@ global.bruhdash = {
   },
 
   // creates a slice of an array with n elements taken from the beginning
-  take: function () {
-
+  take: function (arr,num) {
+    var newArr = [];
+    for(var i = 0; i < arr.length; i++){
+      if(i < num){
+        newArr.push(arr[i]);
+      }else if(num === undefined){
+        newArr.push(arr[0]);
+        break;
+      }
+    }
+    return newArr;
   },
 
   // creates a slice of an array with n elements taken from the end
-  takeRight: function () {
-
+  takeRight: function (arr,num) {
+    var newArr = [];
+    for(var i = arr.length - 1; i >= 0; i--){
+      if(i >= arr.length - num){
+        newArr.unshift(arr[i]);
+      }else if(num === undefined){
+        newArr.push(arr[arr.length -1]);
+        break;
+      }
+    }
+    return newArr;
   },
 
   // fills elements of array with specified value from the start index
   // up to but not including the end index
-  fill: function() {
-
+  fill: function(arr,value,start,end) {
+    for(var i = 0; i < arr.length; i++){
+      if(i >= start && i < end){
+        arr.splice(i,1,value);
+      }else if(start === undefined && end === undefined){
+        arr.splice(i,1,value);
+      }
+    }
+    return arr;
   },
 
   // removes all given values from an array
-  pull: function () {
-
+  pull: function (arr, value1,value2) {
+    var newArr = [];
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i] !== value1 && arr[i] !== value2){
+        newArr.push(arr[i]);
+      }
+    }
+    return newArr;
   },
 
   // removes elements of an array corresponding to the given indices
-  pullAt: function () {
-
+  pullAt: function (arr,index) {
+    for(var i = arr.length - 1; i >= 0; i--){
+      for(var k = 0; k < index.length; k++){
+        if(i === index[k]){
+          arr.splice(index[k], 1);
+        }
+      }
+    }
+    return arr;
   },
 
   // creates an array excluding all the specified values
